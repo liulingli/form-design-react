@@ -1,0 +1,56 @@
+// 注意: 开发过程中可以直接引用网址，
+// 正式环境需引用本地文件
+@font-face {
+  font-family: 'iconfont';  /* project id 1232842 */
+  src: url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.eot');
+  src: url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.svg#iconfont') format('svg');
+}
+
+.form-design-icon {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 加粗
+.icon-bold:before{
+  content: '\e6fe';
+}
+// 字体颜色
+.icon-font-color:before{
+  content: '\e6f9';
+}
+// 字体
+.icon-font-family:before{
+  content: '\e634';
+}
+// 字体大小
+.icon-font-size:before{
+  content: '\e633';
+}
+// 斜体
+.icon-italic:before{
+  content: '\e700'
+}
+// 删除线
+.icon-through-line:before{
+  content: '\e6ff'
+}
+// 重做
+.icon-redo:before{
+  content: '\e69a';
+}
+// 撤销
+.icon-undo:before{
+  content: '\e699';
+}
+// 下划线
+.icon-underline:before{
+  content: '\e701';
+}

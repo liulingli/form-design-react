@@ -1,0 +1,111 @@
+@import './config';
+
+.react-form-design{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  .react-form-design-toolbar{
+    .toolbars{
+      background: #ffffff;
+      padding: 5px 8px;
+      border-top: 1px solid $BORDER_COLOR;
+      border-bottom: 1px solid $BORDER_COLOR;
+    }
+
+    .control-button{
+      display: inline-block;
+      background: transparent;
+      border: none;
+      outline:none;
+      padding: 4px 5px;
+      cursor: pointer;
+      span{
+        font-size: 12px;
+      }
+
+      &.active [class^="JHDraw-icon"]{
+        color: $COLOR_PRIMARY;
+        font-weight: 600;
+      }
+      &.active span{
+        color: $COLOR_PRIMARY;
+        font-weight: 600;
+      }
+    }
+    .font-size-dropdown{
+      min-width: 50px !important;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .split-line{
+      display: inline-block;
+      height: 20px;
+      border-right: 1px solid #cbcccc;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+    .next-balloon-tooltip.control-button-tooltip{
+      background-color: rgba(0,0,0,0.8);
+      font-size: 12px;
+      color: #f3f3f3;
+      padding: 4px 8px;
+      border-radius: 3px;
+      &:after{
+        background-color: rgba(0,0,0,0.8);
+      }
+    }
+
+    .next-menu[class*="-dropdown"]{
+      font-size: 12px;
+      p{
+        font-size: 12px;
+      }
+    }
+  }
+  .react-form-design-drawer{
+    flex: 1;
+    background-color: #f1f1f1;
+    //background-color:#ffffff;
+    //background-image: linear-gradient(#f1f1f1 2px,transparent 0),
+    //linear-gradient(90deg, #f1f1f1 2px,transparent 0),
+    //linear-gradient(#f1f1f1 1px,transparent 0),
+    //linear-gradient(90deg,#f1f1f1 1px,transparent 0);
+    //background-size:75px 75px,75px 75px,15px 15px,15px 15px;
+    display: flex;
+    flex-direction: row;
+
+  }
+  .react-form-design-drawer-left{
+    width: 200px;
+    background-color: #ffffff;
+    .next-tabs.next-medium .next-tabs-tab-inner{
+      font-size: 14px;
+      padding: 12px 29px;
+    }
+    .controls-form{
+      .controls-form-item{
+        font-size: 14px;
+        padding: 0 12px;
+        cursor: move;
+        .controls-form-item-inner{
+          width: 100%;
+          padding: 8px 2px;
+          display: inline-block;
+          border-bottom: 1px solid #f1f1f1;
+        }
+        &:hover{
+          background-color: #C7DFE6;
+        }
+      }
+    }
+  }
+  .react-form-design-drawer-right{
+    flex: 1
+  }
+  .react-grid-layout{
+  }
+  .react-grid-item{
+    background-color: #FFFFFF;
+    border: 1px solid #f3f3f3;
+  }
+}
