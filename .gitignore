@@ -12,11 +12,6 @@
 # public
 /public
 
-# config
-/config-overrides.js
-/rewire-scss.js
-/.flowconfig
-
 
 # misc
 .DS_Store

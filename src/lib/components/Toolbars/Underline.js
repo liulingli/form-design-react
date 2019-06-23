@@ -4,11 +4,8 @@
  * Desc: 表单设计器 -> 工具栏 -> 下划线
  */
 import React from 'react';
-import {Balloon} from '@alifd/next';
 import Utils from '../../utils';
 import IconFont from "../IconFont";
-
-const Tooltip = Balloon.Tooltip;
 
 export default class Underline extends React.Component {
   constructor(props) {
