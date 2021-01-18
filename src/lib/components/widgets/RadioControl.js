@@ -14,13 +14,11 @@ export default class RadioControl extends React.Component {
   render(){
     const { value, dataSource, ...other } = this.props;
     return (
-      <span className='RadioControl'>
-        <Radio.Group
-          value={value}
-          dataSource={dataSource}
-          {...other}
-        />
-      </span>
+      <Radio.Group
+        value={value}
+        dataSource={dataSource}
+        {...other}
+      />
     )
   }
 }

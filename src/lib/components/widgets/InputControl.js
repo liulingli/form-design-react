@@ -14,13 +14,11 @@ export default class InputControl extends React.Component {
   render(){
     const { value, onChange, ...other } = this.props;
     return (
-      <span className='InputControl'>
-        <Input
-          value={value}
-          onChange={onChange}
-          {...other}
-        />
-      </span>
+      <Input
+        value={value}
+        onChange={onChange}
+        {...other}
+      />
     )
   }
 }

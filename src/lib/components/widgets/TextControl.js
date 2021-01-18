@@ -1,10 +1,9 @@
 /**
  * Date: 2019-06-07 23:49:16
  * Author: 刘伶俐
- * Desc: 表单设计器 -> 表单组件->文本框
+ * Desc: 表单设计器 -> 表单组件->纯文本组件
  */
 import React from 'react';
-import {Input} from  '@alifd/next';
 
 export default class TextControl extends React.Component {
   constructor(props) {
@@ -12,11 +11,9 @@ export default class TextControl extends React.Component {
   }
 
   render(){
-    const { value, ...other } = this.props;
+    const { text, ...other } = this.props;
     return (
-      <span className='TextControl'>
-        <span {...other}>{value}</span>
-      </span>
+      <span {...other}>{text}</span>
     )
   }
 }

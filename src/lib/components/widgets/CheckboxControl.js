@@ -14,13 +14,11 @@ export default class CheckboxControl extends React.Component {
   render(){
     const { value, dataSource, ...other } = this.props;
     return (
-      <span className='CheckboxControl'>
-        <Checkbox.Group
-          value={value}
-          dataSource={dataSource}
-          {...other}
-        />
-      </span>
+      <Checkbox.Group
+        value={value}
+        dataSource={dataSource}
+        {...other}
+      />
     )
   }
 }
