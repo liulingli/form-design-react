@@ -11,9 +11,9 @@ export default class TextControl extends React.Component {
   }
 
   render(){
-    const { text, ...other } = this.props;
+    const { value, ...other } = this.props;
     return (
-      <span {...other}>{text}</span>
+      <span {...other}>{value}</span>
     )
   }
 }

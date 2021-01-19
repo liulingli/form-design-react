@@ -20,7 +20,7 @@ const FR = ({data: frData, id, parentItem={}, item: curItem={}})=>{
   }
   
   const containStyle = {
-    width: `${100/(parentItem.column||frProps.column||1)}%`
+    width: `${100/(parentItem.column||frProps.column||1)}%`,
   };
   
   let children = showData.map((item, i)=>{
@@ -28,10 +28,14 @@ const FR = ({data: frData, id, parentItem={}, item: curItem={}})=>{
       return <FR key={i} data={item.children} item={item} parentItem={curItem}/>
     }else {
       const containStyle = {
-        width: `${100/(curItem.column||frProps.column||1)}%`
+        width: `${100/(curItem.column||frProps.column||1)}%`,
       };
       const labelStyle = {
-        width: curItem.labelWidth||frProps.labelWidth
+        width: (curItem.labelWidth||frProps.labelWidth)-0,
+        textAlign: item.textAlign||frProps.textAlign
+      };
+      const fieldStyle = {
+        flexDirection: curItem.displayType||frProps.displayType
       };
       return (
         <Wrapper
@@ -41,14 +45,18 @@ const FR = ({data: frData, id, parentItem={}, item: curItem={}})=>{
           inside={item.type==='area'}
           containStyle={containStyle}
         >
-          <RenderField data={item} labelStyle={labelStyle}/>
+          <RenderField
+            data={item}
+            labelStyle={labelStyle}
+            fieldStyle={fieldStyle}
+          />
         </Wrapper>
       )
     }
   });
   
   if(curItem && curItem.type==='area'&& curItem.id!=='#'){
-    children = <Wrapper className={'gray-bg'}>{children}</Wrapper>
+    children = <div className={'field-wrapper-group gray-bg'}>{children}</div>
   }
   
   if(showData[0] && showData[0].id === '#'){
@@ -60,6 +68,7 @@ const FR = ({data: frData, id, parentItem={}, item: curItem={}})=>{
         parentItem={parentItem}
         item={curItem}
         containStyle={containStyle}
+        inside={curItem&&curItem.type==='area'}
       >
         {curItem.type==='area' && curItem.id!=='#' && <div className='wrapper-title'>{curItem.labelText}</div>}
         {children}

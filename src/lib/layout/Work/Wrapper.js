@@ -7,7 +7,7 @@ import React, {useState, useRef} from 'react';
 import {Button} from '@alifd/next';
 import {useDrag, useDrop} from 'react-dnd';
 import {useStore, useGlobal} from '../../store/hooks';
-import {dropItemFun, deleteItemFun, copyItemFun} from '../../store/utils';
+import {dropItemFun, deleteItemFun, copyItemFun, getIsHide} from '../../store/utils';
 import IconFont from '../../components/IconFont';
 
 export default ({inside, item={type: 'area', id: '#'}, children, parentItem, containStyle, className})=>{
@@ -15,7 +15,7 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
   const boxRef = useRef(null);
   const setGlobal = useGlobal();
   const [position, setPosition] = useState();
-  const {data, onFlattenChange, selected, hovering} = useStore();
+  const {data, onFlattenChange, selected, hovering, formData} = useStore();
   const dropItem = item;
   
   const [{ isDragging }, dragRef, dragPreview] = useDrag({
@@ -59,8 +59,8 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
         const hoverBoundingRect =
           boxRef.current && boxRef.current.getBoundingClientRect();
         // Get vertical middle
-        const hoverMiddleY =
-          (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+        const totalHeight = (hoverBoundingRect.bottom - hoverBoundingRect.top)
+        const hoverMiddleY = totalHeight / 2;
         // Determine mouse position
         // const clientOffset = monitor.getClientOffset();
         const dragOffset = monitor.getSourceClientOffset();
@@ -70,8 +70,9 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
         // When dragging downwards, only move when the cursor is below 50%
         // When dragging upwards, only move when the cursor is above 50%
         // Dragging downwards
+        const between = totalHeight * 0.3;
         
-        if (inside) {
+        if (inside && hoverClientY > between && hoverClientY < totalHeight - between) {
           setPosition('inside');
         } else {
           if (hoverClientY <= hoverMiddleY) {
@@ -94,7 +95,7 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
   
   const handleClick = (event)=>{
     event.stopPropagation();
-    setGlobal({ selected: selected===id?null: id, selectedItem: selected===id?null:item });
+    setGlobal({ selected: id, selectedItem: item });
   };
   
   const deleteItem = (event)=>{
@@ -120,10 +121,10 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
     opacity: isDragging ? 0 : 1,
   };
   if (isActive) {
-    if (inside) {
+    if (position === 'inside') {
       overwriteStyle = {
         ...overwriteStyle,
-        boxShadow: '0 -3px 0 red',
+        backgroundColor: 'rgba(255,235,59,0.2)'
       };
     } else if (position === 'up') {
       overwriteStyle = {
@@ -137,9 +138,12 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
       };
     }
   }
+  
+  let isHide = getIsHide(item.hideRule, formData);
+  
   return (
     <div
-      className={`field-wrapper ${isSelect?'select': ''} ${className||''}`}
+      className={`field-wrapper ${isSelect?'select': ''} ${className||''} ${isHide?'hide': ''}`}
       ref={boxRef}
       style={{backgroundColor: item.type==='area'?'#f1f1f1': '', ...overwriteStyle, ...containStyle}}
       onClick={handleClick}
@@ -150,8 +154,8 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
             <IconFont type='move'/>
           </div>
           <div className='buttons-wrapper'>
-            <Button text onClick={deleteItem}>删除<IconFont type='delete'/></Button>
-            <Button text onClick={handleItemCopy}>复制<IconFont type='copy'/></Button>
+            <Button text onClick={deleteItem}><IconFont type='delete' title='删除'/></Button>
+            <Button text onClick={handleItemCopy}><IconFont type='copy' title='复制'/></Button>
           </div>
         </div>
       }

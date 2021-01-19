@@ -1,5 +1,7 @@
 @import './config';
-
+.next-dialog-body{
+  color: #3c3c3c;
+}
 .react-form-design{
   display: flex;
   flex-direction: column;
@@ -115,7 +117,7 @@
     }
   }
   .react-form-design-drawer-right{
-    width: 250px;
+    width: 350px;
     background-color: #ffffff;
   }
   .react-grid-layout{
@@ -124,6 +126,29 @@
     background-color: #FFFFFF;
     border: 1px solid #f3f3f3;
   }
+}
+
+.option-list-setting{
+  display: block;
+}
+.option-list-title,
+.option-list-value{
+  display: flex;
+  flex-direction: row;
+}
+.option-list-item{
+  flex: 1;
+  line-height: 30px;
+  margin-right: 4px;
+  &:nth-last-of-type(1){
+    margin-right: 0
+  }
+}
+.green{
+  color: green;
+}
+.red{
+  color: red;
 }
 
 .form-item{
@@ -137,7 +162,18 @@
 .field-wrapper.gray-bg{
   background-color: #f1f1f1;
 }
-
+.field-wrapper-group{
+  width: 100%;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px dashed #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  &:empty{
+    height: 50px;
+  }
+}
 .field-wrapper{
   position: relative;
   background-color: #ffffff;
@@ -154,6 +190,9 @@
   &.select{
     border: 1px dashed #00B7EB;
   }
+  &.hide{
+    background-color: #e5e5e5;
+  }
 
   .drag-icon-wrapper{
     position: absolute;
@@ -161,10 +200,13 @@
     left: -2px;
     height: 24px;
     width: 24px;
-    background-color: #409eff;
-    padding: 2px 0 0 4px;
     cursor: move;
     z-index: 10;
+    text-align: center;
+    border: 1px solid #00B7EB;
+    .icon-move{
+      color: #00B7EB;
+    }
   }
 
   .buttons-wrapper{
@@ -191,13 +233,21 @@
   flex-direction: row;
   width: 100%;
   .render-field-label{
-    min-width: 80px;
     margin-right: 10px;
+    line-height: 16px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .label-description{
+    margin-left: 4px;
+    vertical-align: middle;
   }
   .render-field-content{
     flex: 1;
-    &>*{
+    line-height: 30px;
+    &>*, .next-input{
       width: 100%;
+      min-width: auto;
     }
   }
 }
@@ -209,6 +259,7 @@
   display: flex;
   flex-direction: row;
   padding: 5px 8px;
+  line-height: 30px;
 }
 .setting-item-label{
   width: 65px;
@@ -222,4 +273,17 @@
   .next-select{
     width: 100%;
   }
+}
+
+.hide-rule-item{
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+  padding: 8px;
+}
+.hide-rule-item-title{
+  line-height: 30px;
+  font-weight: 600;
+}
+.hide-rule-item-single{
+  line-height: 30px;
 }

@@ -204,3 +204,69 @@ export function findItemByIdFromData(data, id, parent){
   
   return drop
 }
+
+/**
+ * 判断是否隐藏
+ */
+export function getIsHide(hideRule, formData){
+  if(!hideRule) return false;
+  
+  let isHide = false;
+  
+  for(let i=0; i<hideRule.length; i++){
+    const {relation, noValueHide, useShowType, useHideType,
+      showType, hideType, showValue, hideValue, type,
+    } = hideRule[i];
+    // showType, hideType 1包含任一，2包含全部，完全相等
+    let value = formData[relation];
+    let hide1 = noValueHide && ['', null, undefined, []].includes(value);
+    // 选中的显示
+    let hide2 = getHideBySet(value, useShowType, showType, showValue, type);
+    // 选中的隐藏
+    let hide3 = !getHideBySet(value, useHideType, hideType, hideValue, type);
+    
+    isHide = hide1 || hide2 || hide3;
+    
+    break;
+  }
+  
+  return isHide;
+}
+
+function getHideBySet(value, useType, type, useValue, itemType){
+  if(!useType) return false;
+  
+  let hide = false;
+ 
+  if(['input', 'textarea'].includes(itemType) && useValue){
+    if(['', undefined, null].includes(value)){
+      value = '';
+    }
+    if(type === '1'||type==='2'){
+      hide = !(value.indexOf(useValue)>-1);
+    }else if(type === '3'){
+      hide = !(value===useValue)
+    }
+  }else if(useValue){
+    if(['', undefined, null].includes(value)){
+      value = [];
+    }else if(!Array.isArray(value)){
+      value = [value]
+    }
+    if(type === '1'){
+      hide = !(value.filter(item=>{
+        return useValue.includes(item)
+      }).length > 0);
+    }else if(type === '2'){
+      hide = !(value.filter(item=>{
+        return useValue.includes(item)
+      }).length === useValue.length);
+    }else if(type === '3'){
+      hide = !(value.filter(item=>{
+        return useValue.includes(item)
+      }).length === useValue.length && value.length === useValue.length);
+    }
+  }
+  
+  return hide;
+}

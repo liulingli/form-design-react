@@ -63,7 +63,7 @@ const commonSetting = [
   {label: '标签宽度', key: 'labelWidth', desc: ' ', type: 'input'},
   {label: '值', key: 'value', desc: ' ', type: 'input'},
   {label: '正则表达式', key: 'reg', type: 'input'},
-  {label: '显示', key: 'isShow', type: 'checkbox'},
+  {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
 ];
 
 export const formSetting = [
@@ -86,8 +86,8 @@ export const formSetting = [
     desc: ' ',
     type: 'select',
     dataSource: [
-      {label: '换行显示', value: 'row'},
-      {label: '单行显示', value: 'column'},
+      {label: '单行显示', value: 'row'},
+      {label: '换行显示', value: 'column'},
     ]},
   {
     label: '标签显示位置',
@@ -106,7 +106,7 @@ export const elements = [
     text: '纯文本',
     type: 'text',
     schema: {
-      text: '纯文本',
+      value: '',
       type: 'text',
       style: {},
     },
@@ -156,7 +156,7 @@ export const elements = [
     setting: [
       ...commonSetting,
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
-      {label: '选项', key: 'dataSource', desc: ' ', type: 'optionsList'},
+      {label: '选项', key: 'dataSource', desc: ' ', type: 'optionList'},
     ],
   },
   {
@@ -174,7 +174,7 @@ export const elements = [
     setting: [
       ...commonSetting,
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
-      {label: '选项', key: 'dataSource', desc: ' ', type: 'optionsList'},
+      {label: '选项', key: 'dataSource', desc: ' ', type: 'optionList'},
     ],
   },
   {
@@ -192,7 +192,7 @@ export const elements = [
     setting: [
       ...commonSetting,
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
-      {label: '选项', key: 'dataSource', desc: ' ', type: 'optionsList'},
+      {label: '选项', key: 'dataSource', desc: ' ', type: 'optionList'},
     ],
   },
   {
@@ -234,7 +234,7 @@ export const elements = [
       {label: '标签', key: 'labelText', desc: ' ', type: 'input'},
       {label: '说明', key: 'description', desc: ' ', type: 'input'},
       {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
-      {label: '显示', key: 'isShow', type: 'input'},
+      {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
       ...formSetting,
       {label: '成组', key: 'isGroup', desc: ' ', type: 'checkbox'},
       {label: '允许新增', key: 'allowAdd', desc: ' ', type: 'checkbox'},
@@ -267,7 +267,7 @@ export const DEFAULT_SCHEMA = {
       id: 'area',
       parent: '#',
       type: 'area',
-      labelText: '区域啊啊'
+      labelText: '区域啊啊',
     },
     'checkbox': {
       id: 'checkbox',

@@ -7,16 +7,20 @@ import React from 'react';
 import {useStore} from '../../store/hooks';
 import {typeToSetting} from '../../config';
 import {Input, Radio, Select, Checkbox} from '@alifd/next';
+import OptionList from './OptionList';
+import HideRule from './HideRule';
 
 const typeToComponent = {
   input: Input,
   select: Select,
   radioGroup: Radio.Group,
   checkbox: Checkbox,
+  optionList: OptionList,
+  hideRule: HideRule,
 };
 
 export default ()=>{
-  const {selected, selectedItem, frProps={}, onItemSettingChange} = useStore();
+  const {selected, selectedItem, frProps={}, onItemSettingChange, formData, schema} = useStore();
   const settings = selectedItem?typeToSetting[selectedItem.type]: [];
   
   const onChange = (type, value)=>{
@@ -29,6 +33,11 @@ export default ()=>{
         settings.map((item, index)=>{
           const Component = typeToComponent[item.type];
           const {label, ...other} = item;
+          let showValue = null;
+          if(item.key === 'value'){
+            showValue = formData[selected]
+          }
+        
           return (
             <div key={index} className='setting-item'>
               <div className='setting-item-label'>{label}</div>
@@ -36,7 +45,9 @@ export default ()=>{
                 {Component &&
                 <Component
                   {...other}
-                  value={selectedItem[item.key]||frProps[item.key]}
+                  schema={schema.schema}
+                  selectedItem={selectedItem}
+                  value={selectedItem[item.key]||frProps[item.key]||showValue}
                   onChange={(value)=>{
                     onChange(item.key, value)
                   }}

@@ -2,12 +2,12 @@
 // 正式环境需引用本地文件
 @font-face {
   font-family: 'iconfont';  /* project id 1232842 */
-  src: url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.eot');
-  src: url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1232842_96bhnxyavcu.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.eot');
+  src: url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.svg#iconfont') format('svg');
 }
 
 .form-design-icon {
@@ -53,4 +53,32 @@
 // 下划线
 .icon-underline:before{
   content: '\e701';
+}
+// 提示
+.icon-info:before{
+  content: '\e6bf';
+}
+// 复制
+.icon-copy:before{
+  content: '\e780';
+}
+// 删除
+.icon-delete:before{
+  content: '\e674';
+}
+// 移动
+.icon-move:before{
+  content: '\e6c3';
+}
+// 新增-圆圈
+.icon-add-circle:before{
+  content: '\e67e';
+}
+// 删除-圆圈
+.icon-delete-circle:before{
+  content: '\e687';
+}
+// 设置
+.icon-setting:before{
+  content: '\e689'
 }

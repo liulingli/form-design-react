@@ -4,10 +4,12 @@
  * Desc: 表单设计器-单个表单
  */
 import React from 'react';
+import {Balloon} from '@alifd/next';
+import IconFont from '../../components/IconFont';
 import typeToWidget from '../../components/widgets';
 import {useStore} from '../../store/hooks';
 
-const RenderField = ({ data })=>{
+const RenderField = ({ data, labelStyle, fieldStyle })=>{
   const Widget = typeToWidget[data.type];
   
   if(!Widget) return null;
@@ -20,8 +22,14 @@ const RenderField = ({ data })=>{
   };
   
   return (
-    <div className='render-field'>
-      <div className='render-field-label'>{data.labelText}</div>
+    <div className='render-field' style={fieldStyle}>
+      <div
+        className='render-field-label'
+        style={labelStyle}
+      >
+        {data.labelText}
+        {data.description && <Balloon.Tooltip trigger={<IconFont type='info' className='label-description'/>}>{data.description}</Balloon.Tooltip>}
+      </div>
       <div className='render-field-content'>
         <Widget {...data} value={formData[data.id]} onChange={onChangeHandle}/>
       </div>

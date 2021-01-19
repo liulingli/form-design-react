@@ -45,11 +45,16 @@ const Main = ({defaultValue}, ref)=>{
   
   const onItemSettingChange = (selected, type, value)=>{
     const result = { ...schema };
-    result.schema[selected][type] = value;
-    selectedItem[type] = value;
+    if(type === 'value'){
+      formData[selected] = value;
+    }else{
+      result.schema[selected][type] = value;
+      selectedItem[type] = value;
+    }
     setState({
       schema: result,
-      selectedItem
+      selectedItem,
+      formData
     })
   };
   
