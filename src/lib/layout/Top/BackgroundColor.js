@@ -6,7 +6,7 @@
 import React from 'react';
 import {SketchPicker} from 'react-color';
 import {Dropdown} from '@alifd/next';
-import Utils from '../../utils';
+import Utils from '../../utils/index';
 
 export default class StrokeColor extends React.Component {
   constructor(props) {
@@ -15,38 +15,25 @@ export default class StrokeColor extends React.Component {
   }
 
   onChangeStyle(color) {
-    let strokeColor = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
-    const {editingShape, editingShapeIndex, shapeGroup} = this.props;
-    if (!editingShape) {
+    const rgbaColor = `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`;
+    const {selected, styleKey} = this.props;
+    if (!selected) {
       this.setState({
         visible: false
       });
       return;
     }
-    const oldShapeGroup = Utils.deepClone(shapeGroup, []);
-    const oldStyle = editingShape.style || {};
-    const newStyle = {
-      ...oldStyle,
-      strokeColor: strokeColor
-    };
-    let newShape = {
-      ...editingShape,
-      style: newStyle
-    };
-
+    
     this.setState({
       visible: false
     });
-
-    oldShapeGroup[editingShapeIndex] = newShape;
-
-    this.props.onChange && this.props.onChange(oldShapeGroup);
+    
+    this.props.onChange && this.props.onChange(styleKey, rgbaColor);
   }
 
   render() {
-    let {editingShape, curShapeName, shapeName, className} = this.props;
-    editingShape = editingShape || {};
-    let colorStr = (editingShape.style || {}).strokeColor;
+    let {selectedItem = {}, className, styleKey} = this.props;
+    let colorStr = (selectedItem.wrapStyle || {})[styleKey];
     let color;
     if (colorStr) {
       color = Utils.colorRGBtoJson(colorStr);
@@ -58,13 +45,13 @@ export default class StrokeColor extends React.Component {
         triggerType='click'
         trigger={
           <button
-            className={`control-button ${className || ''} ${curShapeName === shapeName ? 'active' : ''}`}
+            className={`control-button ${className || ''} ${color ? 'active' : ''}`}
             title='背景颜色'
           >
             背景颜色
           </button>
         }
-        className={`stroke-color-dropdown ${this.state.className}`}
+        className={`stroke-color-dropdown`}
         onVisibleChange={(visible) => {
           this.setState({
             visible: visible

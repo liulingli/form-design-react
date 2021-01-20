@@ -140,12 +140,28 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
   }
   
   let isHide = getIsHide(item.hideRule, formData);
+  let {border = [], borderStyle='solid', borderWidth=1, borderColor} = item;
+  borderWidth = borderWidth - 0;
+  let borderStyleMain = {
+    borderStyle,
+    borderColor,
+    borderLeftWidth: border.includes('left')?borderWidth:0,
+    borderRightWidth: border.includes('right')?borderWidth:0,
+    borderTopWidth: border.includes('top')?borderWidth:0,
+    borderBottomWidth: border.includes('bottom')?borderWidth:0,
+  };
   
   return (
     <div
       className={`field-wrapper ${isSelect?'select': ''} ${className||''} ${isHide?'hide': ''}`}
       ref={boxRef}
-      style={{backgroundColor: item.type==='area'?'#f1f1f1': '', ...overwriteStyle, ...containStyle}}
+      style={{
+        backgroundColor: item.type==='area'?'#f1f1f1': '',
+        ...overwriteStyle,
+        ...containStyle,
+        ...item.wrapStyle,
+        ...borderStyleMain
+      }}
       onClick={handleClick}
     >
       {isSelect &&

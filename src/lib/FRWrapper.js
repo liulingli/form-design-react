@@ -3,11 +3,10 @@
  * Author: 刘伶俐
  * Desc: 表单设计器
  */
-import React, {useRef, useState, forwardRef, useImperativeHandle} from 'react';
-import {useSet} from './store/hooks';
+import React, {forwardRef} from 'react';
 import {Ctx, StoreCtx} from './store/context';
-import LayoutToolbar from './components/toolbars';
-import WorkAreaGrid from './layout/Work';
+import Toolbar from './layout/Top';
+import WorkAreaGrid from './layout/Work/index';
 import ControlList from './layout/Left';
 import Setting from './layout/Right';
 import config from './config/index';
@@ -32,6 +31,7 @@ const Wrapper = ({schema, formData, onChange, onSchemaChange, setGlobal, frProps
     formData,
     schema,
     frProps,
+    options: config,
     onFlattenChange,
     onFrPropsChange,
     onChange,
@@ -42,7 +42,7 @@ const Wrapper = ({schema, formData, onChange, onSchemaChange, setGlobal, frProps
       <StoreCtx.Provider value={store}>
         <div className='react-form-design'>
           <div className='react-form-design-toolbar'>
-            <LayoutToolbar options={config}/>
+            <Toolbar/>
           </div>
           <div className='react-form-design-drawer'>
             <div className='react-form-design-drawer-left'>

@@ -5,43 +5,25 @@
  */
 import React from 'react';
 import {Dropdown, Menu} from '@alifd/next';
-import Utils from '../../utils';
-import IconFont from "../IconFont"
+import IconFont from "../../components/IconFont/index"
 
-export default class LineWidth extends React.Component {
+export default class FontSize extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   onChangeStyle(fontSize) {
-    const {editingShape, editingShapeIndex, shapeGroup} = this.props;
-    if (!editingShape) return;
-    const oldShapeGroup = Utils.deepClone(shapeGroup, []);
-    const oldStyle = editingShape.fontStyle || {};
-    const newFontStyle = {
-      ...oldStyle,
-      fontSize: fontSize
-    };
-    let newShape = {
-      ...editingShape,
-      fontStyle: newFontStyle
-    };
-
-    this.setState({
-      visible: false
-    });
-
-    oldShapeGroup[editingShapeIndex] = newShape;
-
-    this.props.onChange && this.props.onChange(oldShapeGroup);
+    const {selected, styleKey} = this.props;
+    if (!selected) return;
+  
+    this.props.onChange && this.props.onChange(styleKey, fontSize);
   }
 
   render() {
-    let {options, editingShape, curShapeName, shapeName, className} = this.props;
-    let {currentIndex} = this.state;
-    editingShape = editingShape || {};
-    let fontSize = (editingShape.fontStyle || {}).fontSize;
+    let {options, selectedItem={}, className, styleKey} = this.props;
+    let currentIndex;
+    let fontSize = (selectedItem.wrapStyle || {})[styleKey];
     for (let index = 0; index < options.fontSizes.length; index++) {
       let item = options.fontSizes[index];
       if (fontSize === item.size) {
@@ -55,13 +37,13 @@ export default class LineWidth extends React.Component {
         triggerType='click'
         trigger={
           <button
-            className={`control-button ${className || ''} ${curShapeName === shapeName ? 'active' : ''}`}
+            className={`control-button ${className || ''}`}
             title='字体大小'
           >
             <IconFont type='font-size'/>
           </button>
         }
-        className={`font-size-dropdown ${this.state.className}`}
+        className={`font-size-dropdown`}
       >
         <Menu>
           {options.fontSizes.map((item, index) => {

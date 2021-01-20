@@ -9,7 +9,7 @@ import IconFont from '../../components/IconFont';
 import typeToWidget from '../../components/widgets';
 import {useStore} from '../../store/hooks';
 
-const RenderField = ({ data, labelStyle, fieldStyle })=>{
+const RenderField = ({ data, labelStyle, fieldStyle, valueData, onChangeValue })=>{
   const Widget = typeToWidget[data.type];
   
   if(!Widget) return null;
@@ -17,8 +17,12 @@ const RenderField = ({ data, labelStyle, fieldStyle })=>{
   const {onChange, formData} = useStore();
   
   const onChangeHandle = (value)=>{
-    formData[data.id] = value;
-    onChange && onChange(formData);
+    if(onChangeValue){
+      onChangeValue && onChangeValue(data.id, value);
+    }else{
+      formData[data.id] = value;
+      onChange && onChange(formData);
+    }
   };
   
   return (
@@ -31,7 +35,11 @@ const RenderField = ({ data, labelStyle, fieldStyle })=>{
         {data.description && <Balloon.Tooltip trigger={<IconFont type='info' className='label-description'/>}>{data.description}</Balloon.Tooltip>}
       </div>
       <div className='render-field-content'>
-        <Widget {...data} value={formData[data.id]} onChange={onChangeHandle}/>
+        <Widget
+          {...data}
+          value={valueData?valueData[data.id]:formData[data.id]}
+          onChange={onChangeHandle}
+        />
       </div>
     </div>
   )

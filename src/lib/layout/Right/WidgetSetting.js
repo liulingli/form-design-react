@@ -6,18 +6,7 @@
 import React from 'react';
 import {useStore} from '../../store/hooks';
 import {typeToSetting} from '../../config';
-import {Input, Radio, Select, Checkbox} from '@alifd/next';
-import OptionList from './OptionList';
-import HideRule from './HideRule';
-
-const typeToComponent = {
-  input: Input,
-  select: Select,
-  radioGroup: Radio.Group,
-  checkbox: Checkbox,
-  optionList: OptionList,
-  hideRule: HideRule,
-};
+import typeToComponent from './typeToComponent';
 
 export default ()=>{
   const {selected, selectedItem, frProps={}, onItemSettingChange, formData, schema} = useStore();

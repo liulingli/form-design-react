@@ -55,13 +55,56 @@ export default {
   }],
 }
 
+const borderSetting = [
+  {
+    label: '边框',
+    key: 'border',
+    desc: ' ',
+    type: 'checkboxGroup',
+    dataSource: [
+      {label: '上', value: 'top'},
+      {label: '下', value: 'bottom'},
+      {label: '左', value: 'left'},
+      {label: '右', value: 'right'}
+    ]
+  },
+  {
+    label: '边框样式',
+    key: 'borderStyle',
+    desc: ' ',
+    type: 'select',
+    dataSource: [
+      {label: '实线', value: 'solid'},
+      {label: '虚线', value: 'dashed'},
+    ]
+  },
+  {
+    label: '边框宽度',
+    key: 'borderWidth',
+    desc: ' ',
+    type: 'selectAuto',
+    dataSource: [
+      {label: '1', value: 1},
+      {label: '2', value: 2},
+      {label: '3', value: 3},
+      {label: '4', value: 4},
+    ]
+  },
+  {
+    label: '边框颜色',
+    key: 'borderColor',
+    desc: ' ',
+    type: 'sketchPicker',
+  },
+];
+
 const commonSetting = [
   {label: 'id', key: 'id', desc: '数据存储的名称/英文/必填 ', type: 'input', disabled: true},
   {label: '标签', key: 'labelText', desc: ' ', type: 'input'},
   {label: '说明', key: 'description', desc: ' ', type: 'input'},
   {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
   {label: '标签宽度', key: 'labelWidth', desc: ' ', type: 'input'},
-  {label: '值', key: 'value', desc: ' ', type: 'input'},
+  ...borderSetting,
   {label: '正则表达式', key: 'reg', type: 'input'},
   {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
 ];
@@ -99,6 +142,7 @@ export const formSetting = [
       {label: '居中', value: 'center'},
       {label: '居右', value: 'right'},
     ]},
+  ...borderSetting,
 ];
 
 export const elements = [
@@ -133,6 +177,7 @@ export const elements = [
     schema: {
       labelText: '大文本框',
       type: 'textarea',
+      rows: 2,
       style: {},
     },
     setting: [
@@ -236,11 +281,26 @@ export const elements = [
       {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
       {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
       ...formSetting,
-      {label: '成组', key: 'isGroup', desc: ' ', type: 'checkbox'},
+    ],
+  },
+  {
+    text: '成组表单',
+    type: 'group',
+    schema: {
+      labelText: '成组表单',
+      type: 'group',
+      style: {},
+    },
+    setting: [
+      {label: 'id', key: 'id', desc: '数据存储的名称/英文/必填 ', type: 'input'},
+      {label: '标签', key: 'labelText', desc: ' ', type: 'input'},
+      {label: '说明', key: 'description', desc: ' ', type: 'input'},
+      {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
+      {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
+      ...formSetting,
       {label: '允许新增', key: 'allowAdd', desc: ' ', type: 'checkbox'},
       {label: '新增条数', key: 'maxAddNumber', desc: ' ', type: 'input'},
-      
-    ],
+    ]
   }
 ];
 
@@ -274,6 +334,16 @@ export const DEFAULT_SCHEMA = {
       parent: 'area',
       type: 'checkbox',
       labelText: '复选框',
+      dataSource: [
+        {label: '选择1', value: '01'},
+        {label: '选择2', value: '02'}
+      ]
+    },
+    'group': {
+      id: 'group',
+      parent: '#',
+      type: 'group',
+      labelText: '成组',
     },
   },
   formData: {},
@@ -291,4 +361,5 @@ function getTypeToSetting(elements){
   });
   return typeToSetting
 }
+
 export const typeToSetting = getTypeToSetting(elements);

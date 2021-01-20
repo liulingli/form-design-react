@@ -2,12 +2,12 @@
 // 正式环境需引用本地文件
 @font-face {
   font-family: 'iconfont';  /* project id 1232842 */
-  src: url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.eot');
-  src: url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1232842_5fiugkzqie2.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1232842_tzb8d65mq0c.eot');
+  src: url('//at.alicdn.com/t/font_1232842_tzb8d65mq0c.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1232842_tzb8d65mq0c.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1232842_tzb8d65mq0c.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1232842_tzb8d65mq0c.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1232842_tzb8d65mq0c.svg#iconfont') format('svg');
 }
 
 .form-design-icon {
@@ -81,4 +81,12 @@
 // 设置
 .icon-setting:before{
   content: '\e689'
+}
+// 上传
+.icon-upload:before{
+  content: '\e688'
+}
+// 下载
+.icon-download:before{
+  content: '\e68c'
 }

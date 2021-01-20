@@ -10,9 +10,10 @@ import radio from './RadioControl';
 import select from './SelectControl';
 import text from './TextControl';
 import textarea from './TextareaControl';
+import group from './GroupControl';
 
 const typeToWidget = {
-  checkbox, datePicker, input, radio, select, text, textarea
+  checkbox, datePicker, input, radio, select, text, textarea, group
 };
 
 export default typeToWidget

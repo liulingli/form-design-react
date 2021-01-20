@@ -2,6 +2,15 @@
 .next-dialog-body{
   color: #3c3c3c;
 }
+.SketchPickerField{
+  border-width: 4px;
+  border-style: solid;
+  width: 40px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline-block;
+  cursor: pointer;
+}
 .react-form-design{
   display: flex;
   flex-direction: column;
@@ -156,11 +165,16 @@
 }
 
 .null-h2{
-  height: 30px;
   background-color: #f1f1f1;
+  text-align: center;
+  line-height: 80px;
+  width: 100%;
 }
-.field-wrapper.gray-bg{
-  background-color: #f1f1f1;
+.field-wrapper-group-top{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .field-wrapper-group{
   width: 100%;
@@ -171,25 +185,44 @@
   flex-direction: row;
   flex-wrap: wrap;
   &:empty{
-    height: 50px;
+    height: 74px;
   }
 }
 .field-wrapper{
   position: relative;
   background-color: #ffffff;
-  border: 1px dashed #c4c4c4;
   padding: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
 
+  &:before{
+    content: '';
+    display: inline-block;
+    border: 1px dashed #c4c4c4;
+    width: calc(100% - 2px);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  &>.render-field,
+  &>.field-wrapper-group-top
+  {
+    position: relative;
+    z-index: 2;
+  }
+
+  &.select:before{
+    border: 1px dashed #00B7EB;
+  }
+
   &:nth-last-of-type(1){
     margin-bottom: 0;
   }
-  &.select{
-    border: 1px dashed #00B7EB;
-  }
+
   &.hide{
     background-color: #e5e5e5;
   }
@@ -222,10 +255,8 @@
 
 .wrapper-title{
   width: 100%;
-  font-weight: 600;
   border-bottom: 1px solid #f1f1f1;
   padding-bottom: 6px;
-  background-color: #ffffff;
 }
 
 .render-field{
@@ -273,6 +304,9 @@
   .next-select{
     width: 100%;
   }
+  .next-range{
+    margin-top: 8px;
+  }
 }
 
 .hide-rule-item{
@@ -286,4 +320,25 @@
 }
 .hide-rule-item-single{
   line-height: 30px;
+}
+
+.WrapperAreaAdd{
+  width: 100%;
+  flex: 1;
+}
+.WrapperAreaAdd-item{
+  display: flex;
+  align-items: center;
+  .wrapper-title{
+    display: none;
+  }
+  &:nth-of-type(1) .wrapper-title{
+    display: block;
+  }
+}
+.WrapperAreaAdd-item-content{
+  flex: 1;
+  &>.field-wrapper{
+    width: 100% !important;
+  }
 }

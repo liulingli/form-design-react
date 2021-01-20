@@ -5,6 +5,11 @@
  */
 import Utils from '../utils';
 
+// 能允许添加子集
+function isCanInside(type){
+  return ['area', 'group'].includes(type)
+}
+
 // 新增表单项
 export const addItemFun = ({selected, item, data})=>{
   // 新增至选中的里面，或上面
@@ -14,7 +19,7 @@ export const addItemFun = ({selected, item, data})=>{
     dropParent = data[0];
   }
   
-  if(dropItem && dropItem.type==='area'){
+  if(dropItem && isCanInside(dropItem.type)){
     dropItem.children = dropItem.children||[];
     dropItem.children.push({
       ...item,
@@ -149,7 +154,7 @@ const setChildren = (data, parentToData={})=>{
     const children = setChildren(parentToData[item.id], parentToData);
     return {
       ...item,
-      children: children ? children : item.type==='area'?[]: null
+      children: children ? children : isCanInside(item.type)?[]: null
     }
   });
 };

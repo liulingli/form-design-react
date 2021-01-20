@@ -5,13 +5,8 @@
  */
 import React from 'react';
 import {formSetting} from '../../config';
-import {Select, Input} from '@alifd/next';
 import {useStore} from '../../store/hooks';
-
-const typeToComponent = {
-  input: Input,
-  select: Select,
-};
+import typeToComponent from './typeToComponent';
 
 export default ()=>{
   const {frProps = {}, onFrPropsChange} = useStore();
