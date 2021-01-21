@@ -27,13 +27,16 @@ const RenderField = ({ data, labelStyle, fieldStyle, valueData, onChangeValue })
   
   return (
     <div className='render-field' style={fieldStyle}>
-      <div
-        className='render-field-label'
-        style={labelStyle}
-      >
-        {data.labelText}
-        {data.description && <Balloon.Tooltip trigger={<IconFont type='info' className='label-description'/>}>{data.description}</Balloon.Tooltip>}
-      </div>
+      {
+        data.type!=='text' &&
+        <div
+          className='render-field-label'
+          style={labelStyle}
+        >
+          {data.labelText}
+          {data.description && <Balloon.Tooltip trigger={<IconFont type='info' className='label-description'/>}>{data.description}</Balloon.Tooltip>}
+        </div>
+      }
       <div className='render-field-content'>
         <Widget
           {...data}

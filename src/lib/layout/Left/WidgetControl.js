@@ -24,10 +24,10 @@ export default ({text, type, schema})=>{
   });
   
   const setGlobal = useGlobal();
-  const {selected, onFlattenChange, data} = useStore();
+  const {selected, onFlattenChange, data, schema: schemaData} = useStore();
   
   const handleElementClick = ()=>{
-    const [newFlatten, newId] = addItemFun({ selected, item: {id: `${type}_${Utils.getUuid(6)}`, ...schema}, data});
+    const [newFlatten, newId] = addItemFun({schemaData, selected, item: {id: `${type}_${Utils.getUuid(6)}`, ...schema}, data});
     onFlattenChange(newFlatten);
     setGlobal({ selected: newId });
   };

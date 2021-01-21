@@ -36,7 +36,7 @@ export default ()=>{
                   {...other}
                   schema={schema.schema}
                   selectedItem={selectedItem}
-                  value={selectedItem[item.key]||frProps[item.key]||showValue}
+                  value={selectedItem[item.key]||showValue}
                   onChange={(value)=>{
                     onChange(item.key, value)
                   }}

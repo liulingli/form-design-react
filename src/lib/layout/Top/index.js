@@ -17,6 +17,7 @@ import Undo from './Undo';
 import Redo from './Redo';
 import Import from './Import';
 import Export from './Export';
+import Preview from './Preview';
 import {useStore} from '../../store/hooks';
 
 export default ()=>{
@@ -31,6 +32,8 @@ export default ()=>{
     onRedo,
     undoItems,
     redoItems,
+    preview,
+    onPreview,
   } = useStore();
   
   const onChange = (type, value)=>{
@@ -52,6 +55,8 @@ export default ()=>{
     onRedo,
     undoItems,
     redoItems,
+    preview,
+    onPreview,
   };
   
   return (
@@ -77,6 +82,10 @@ export default ()=>{
       <Split/>
       
       <BackgroundColor styleKey='backgroundColor' {...props}/>
+  
+      <Split/>
+  
+      <Preview {...props}/>
     </div>
   )
 }

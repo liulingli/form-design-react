@@ -98,14 +98,28 @@ const borderSetting = [
   },
 ];
 
+const columnDataSource = [
+  {label: '一行一列', value: '1'},
+  {label: '一行二列', value: '2'},
+  {label: '一行三列', value: '3'},
+  {label: '一行四列', value: '4'},
+  {label: '一行五列', value: '5'}
+];
+
 const commonSetting = [
   {label: 'id', key: 'id', desc: '数据存储的名称/英文/必填 ', type: 'input', disabled: true},
   {label: '标签', key: 'labelText', desc: ' ', type: 'input'},
   {label: '说明', key: 'description', desc: ' ', type: 'input'},
-  {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
+  {
+    label: '元素宽度',
+    key: 'wrapWidth',
+    desc: ' ',
+    type: 'select',
+    clear: true,
+    dataSource: columnDataSource
+  },
   {label: '标签宽度', key: 'labelWidth', desc: ' ', type: 'input'},
   ...borderSetting,
-  {label: '正则表达式', key: 'reg', type: 'input'},
   {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
 ];
 
@@ -114,13 +128,7 @@ export const formSetting = [
     label: '整体布局',
     key: 'column',
     type: 'select',
-    dataSource: [
-      {label: '一行一列', value: '1'},
-      {label: '一行二列', value: '2'},
-      {label: '一行三列', value: '3'},
-      {label: '一行四列', value: '4'},
-      {label: '一行五列', value: '5'}
-      ]
+    dataSource: columnDataSource,
   },
   {label: '标签宽度', key: 'labelWidth', desc: ' ', type: 'input'},
   {
@@ -152,10 +160,14 @@ export const elements = [
     schema: {
       value: '',
       type: 'text',
-      style: {},
+      wrapStyle: {},
     },
     setting: [
+      {label: 'id', key: 'id', desc: '数据存储的名称/英文/必填 ', type: 'input', disabled: true},
+      {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
       {label: '值', key: 'value', desc: ' ', type: 'input'},
+      ...borderSetting,
+      {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
     ],
   },
   {
@@ -164,35 +176,24 @@ export const elements = [
     schema: {
       labelText: '文本框',
       type: 'input',
-      style: {},
+      wrapStyle: {},
     },
     setting: [
       ...commonSetting,
+      {label: '正则表达式', key: 'reg', type: 'input'},
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
+      {label: '多行文本', key: 'isRows', desc: ' ', type: 'checkbox'},
+      {label: '显示行数', key: 'rows', desc: ' ', type: 'input'},
     ],
   },
   {
-    text: '大文本框',
-    type: 'textarea',
-    schema: {
-      labelText: '大文本框',
-      type: 'textarea',
-      rows: 2,
-      style: {},
-    },
-    setting: [
-      ...commonSetting,
-      {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
-      {label: '行数', key: 'rows', desc: ' ', type: 'input'},
-    ],
-  },
-  {
-    text: '下拉选择框',
+    text: '下拉选择',
     type: 'select',
     schema: {
-      labelText: '下拉选择框',
+      labelText: '下拉选择',
       type: 'select',
-      style: {},
+      mode: 'single',
+      wrapStyle: {},
       dataSource: [
         {label: '值1', value: '01'},
         {label: '值2', value: '02'}
@@ -201,16 +202,27 @@ export const elements = [
     setting: [
       ...commonSetting,
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
+      {
+        label: '选择模式',
+        key: 'mode',
+        desc: ' ',
+        type: 'select',
+        dataSource: [
+          {label: '单选', value: 'single'},
+          {label: '多选', value: 'multiple'},
+          {label: '标签', value: 'tag'}
+        ]
+      },
       {label: '选项', key: 'dataSource', desc: ' ', type: 'optionList'},
     ],
   },
   {
-    text: '单选框',
-    type: 'radio',
+    text: '单选按钮组',
+    type: 'radioGroup',
     schema: {
-      labelText: '单选框',
-      type: 'radio',
-      style: {},
+      labelText: '单选按钮组',
+      type: 'radioGroup',
+      wrapStyle: {},
       dataSource: [
         {label: '值1', value: '01'},
         {label: '值2', value: '02'}
@@ -219,16 +231,40 @@ export const elements = [
     setting: [
       ...commonSetting,
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
+      {
+        label: '显示方式',
+        key: 'itemDirection',
+        desc: ' ',
+        type: 'radioGroup',
+        dataSource: [
+          {label: '平铺', value: 'hoz'},
+          {label: '换行', value: 'ver'}
+        ]
+      },
       {label: '选项', key: 'dataSource', desc: ' ', type: 'optionList'},
     ],
   },
   {
-    text: '多选框',
+    text: '复选按钮',
     type: 'checkbox',
     schema: {
-      labelText: '多选框',
+      labelText: '复选按钮',
       type: 'checkbox',
-      style: {},
+      wrapStyle: {},
+    },
+    setting: [
+      ...commonSetting,
+      {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
+    ],
+  },
+  {
+    text: '复选按钮组',
+    type: 'checkboxGroup',
+    schema: {
+      labelText: '复选按钮组',
+      type: 'checkboxGroup',
+      showType: 'ver',
+      wrapStyle: {},
       dataSource: [
         {label: '值1', value: '01'},
         {label: '值2', value: '02'}
@@ -237,16 +273,26 @@ export const elements = [
     setting: [
       ...commonSetting,
       {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
+      {
+        label: '显示方式',
+        key: 'itemDirection',
+        desc: ' ',
+        type: 'radioGroup',
+        dataSource: [
+          {label: '平铺', value: 'hoz'},
+          {label: '换行', value: 'ver'}
+        ]
+      },
       {label: '选项', key: 'dataSource', desc: ' ', type: 'optionList'},
     ],
   },
   {
-    text: '时间选择框',
-    type: 'date',
+    text: '时间选择器',
+    type: 'datePicker',
     schema: {
-      labelText: '时间选择框',
-      type: 'date',
-      style: {},
+      labelText: '时间选择器',
+      type: 'datePicker',
+      wrapStyle: {},
     },
     setting: [
       ...commonSetting,
@@ -259,11 +305,24 @@ export const elements = [
     schema: {
       labelText: '公式计算',
       type: 'calculate',
-      style: {},
+      wrapStyle: {},
     },
     setting: [
       ...commonSetting,
-      {label: '只读', key: 'disabled', desc: ' ', type: 'checkbox'},
+      {label: '计算规则', key: 'calculateSetting', desc: ' ', type: 'calculateSetting'},
+    ],
+  },
+  {
+    text: '拼接文本',
+    type: 'joinText',
+    schema: {
+      labelText: '拼接文本',
+      type: 'joinText',
+      wrapStyle: {},
+    },
+    setting: [
+      ...commonSetting,
+      {label: '拼接规则', key: 'joinTextSetting', desc: ' ', type: 'joinTextSetting'},
     ],
   },
   {
@@ -272,13 +331,20 @@ export const elements = [
     schema: {
       labelText: '区域',
       type: 'area',
-      style: {},
+      wrapStyle: {},
     },
     setting: [
       {label: 'id', key: 'id', desc: '数据存储的名称/英文/必填 ', type: 'input'},
       {label: '标签', key: 'labelText', desc: ' ', type: 'input'},
       {label: '说明', key: 'description', desc: ' ', type: 'input'},
-      {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
+      {
+        label: '元素宽度',
+        key: 'wrapWidth',
+        desc: ' ',
+        type: 'select',
+        clear: true,
+        dataSource: columnDataSource
+      },
       {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
       ...formSetting,
     ],
@@ -289,13 +355,20 @@ export const elements = [
     schema: {
       labelText: '成组表单',
       type: 'group',
-      style: {},
+      wrapStyle: {},
     },
     setting: [
       {label: 'id', key: 'id', desc: '数据存储的名称/英文/必填 ', type: 'input'},
       {label: '标签', key: 'labelText', desc: ' ', type: 'input'},
       {label: '说明', key: 'description', desc: ' ', type: 'input'},
-      {label: '元素宽度', key: 'wrapWidth', desc: ' ', type: 'input'},
+      {
+        label: '元素宽度',
+        key: 'wrapWidth',
+        desc: ' ',
+        type: 'select',
+        clear: true,
+        dataSource: columnDataSource
+      },
       {label: '显隐规则', key: 'hideRule', type: 'hideRule'},
       ...formSetting,
       {label: '允许新增', key: 'allowAdd', desc: ' ', type: 'checkbox'},
@@ -320,8 +393,10 @@ export const DEFAULT_SCHEMA = {
     'textarea': {
       id: 'textarea',
       parent: '#',
-      type: 'textarea',
+      type: 'input',
       labelText: '大文本框',
+      isRows: true,
+      rows: 2,
     },
     'area': {
       id: 'area',
@@ -350,7 +425,8 @@ export const DEFAULT_SCHEMA = {
   frProps: {
     column: 2,
     labelWidth: 80,
-    displayType: 'row'
+    textAlign: 'right',
+    displayType: 'row',
   }
 };
 

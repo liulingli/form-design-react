@@ -9,15 +9,15 @@ import FRWrapper from './FRWrapper';
 import {useSet} from './store/hooks';
 import {DEFAULT_SCHEMA} from './config';
 
-const Main = ({defaultValue}, ref)=>{
+const Main = ({defaultValue, isEdit: isEdit}, ref)=>{
   const [state, setState] = useSet({
     schema: defaultValue ? defaultValue : DEFAULT_SCHEMA,
-    hovering: undefined, // 目前没有用到
     preview: false, // preview = false 是编辑模式
-    selected: undefined, // 被选中的$id, 如果object/array的内部，以首字母0标识
+    selected: undefined, // 被选中的$id,
     selectedItem: undefined,
     undoItems: [],
     redoItems: [],
+    isEdit: isEdit,
   });
   
   useEffect(() => {
@@ -142,6 +142,12 @@ const Main = ({defaultValue}, ref)=>{
     }
   };
   
+  const onPreview = ()=>{
+    setState({
+      preview: !preview
+    })
+  };
+  
   const {undoItems, redoItems, hovering, preview, schema, selected, selectedItem} = state;
   
   const rootState = {
@@ -155,14 +161,15 @@ const Main = ({defaultValue}, ref)=>{
   };
   const showSchema = JSON.parse(JSON.stringify(schema));
   
-  console.log('render', { schema, undoItems, redoItems });
-  
   const allProps = {
     schema: showSchema,
     formData: showSchema.formData,
     frProps: showSchema.frProps,
     undoItems, redoItems,
+  
+    isEdit,
     ...rootState,
+    
     onChange,
     onSchemaChange,
     onFrPropsChange,
@@ -171,6 +178,7 @@ const Main = ({defaultValue}, ref)=>{
     onExportData,
     onUndo,
     onRedo,
+    onPreview,
     setGlobal: setState,
   };
   return (

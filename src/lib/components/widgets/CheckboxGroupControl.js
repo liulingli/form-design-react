@@ -1,21 +1,20 @@
 /**
  * Date: 2019-06-07 23:49:16
  * Author: 刘伶俐
- * Desc: 表单设计器 -> 表单组件->下拉框
+ * Desc: 表单设计器 -> 表单组件->复选框
  */
 import React from 'react';
-import {Select} from '@alifd/next';
+import {Checkbox} from  '@alifd/next';
 
-export default class SelectControl extends React.Component {
+export default class CheckboxGroupControl extends React.Component {
   constructor(props) {
     super(props)
   }
 
   render(){
-    const { value, dataSource, ... other } = this.props;
+    const { value, dataSource, ...other } = this.props;
     return (
-      <Select
-        showSearch={true}
+      <Checkbox.Group
         value={value}
         dataSource={dataSource}
         {...other}

@@ -10,13 +10,12 @@ export default class CheckboxControl extends React.Component {
   constructor(props) {
     super(props)
   }
-
+  
   render(){
-    const { value, dataSource, ...other } = this.props;
+    const { value, ...other } = this.props;
     return (
-      <Checkbox.Group
+      <Checkbox
         value={value}
-        dataSource={dataSource}
         {...other}
       />
     )

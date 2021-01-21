@@ -11,7 +11,7 @@ function isCanInside(type){
 }
 
 // 新增表单项
-export const addItemFun = ({selected, item, data})=>{
+export const addItemFun = ({selected, item, data, schemaData})=>{
   // 新增至选中的里面，或上面
   let [dropItem, dropParent] = findItemByIdFromData(data, selected);
   
@@ -202,12 +202,15 @@ export function findItemByIdFromData(data, id, parent){
     if(item.id === id){
       drop = [item, parent];
       break;
-    }else {
-      drop = findItemByIdFromData(children,id, item)
+    }else{
+      drop = findItemByIdFromData(children, id, item);
+      if(drop[0]){
+        break;
+      }
     }
   }
   
-  return drop
+  return drop;
 }
 
 /**

@@ -23,7 +23,7 @@ const FR = ({data: frData, parentItem={}, valueData, onChangeValue})=>{
   }
   
   const containStyle = {
-    width: `${100/(parentItem.column||frProps.column||1)}%`,
+    width: `${100/(showData.wrapWidth|| parentItem.column||frProps.column||1)}%`,
   };
   
   const labelStyle = {
@@ -59,7 +59,7 @@ const FR = ({data: frData, parentItem={}, valueData, onChangeValue})=>{
 };
 
 // 区域
-const WrapperArea = ({showData, parentItem, containStyle, valueData, onChangeValue})=>{
+const WrapperArea = ({hideTitle, showData, parentItem, containStyle, valueData, onChangeValue, isGroup})=>{
   
   return (
     <Wrapper
@@ -70,8 +70,9 @@ const WrapperArea = ({showData, parentItem, containStyle, valueData, onChangeVal
         flexDirection: 'column'
       }}
       inside={true}
+      isGroup={isGroup}
     >
-      {showData.id !== '#' &&  <div className='wrapper-title'>{showData.labelText}</div>}
+      {showData.id !== '#' && !hideTitle && <div className='wrapper-title'>{showData.labelText}</div>}
       <div className={showData.id !== '#'?'field-wrapper-group':'field-wrapper-group-top'}>
         {
           showData.children.map((item, index)=>{
@@ -92,8 +93,11 @@ const WrapperArea = ({showData, parentItem, containStyle, valueData, onChangeVal
 };
 
 const WrapperAreaAdd = ({showData, parentItem, containStyle})=>{
-  const {formData = {}, onChange} = useStore();
-  const valueList = formData[showData.id]||[{}];
+  const {formData = {}, onChange, preview} = useStore();
+  let valueList = formData[showData.id]||[{}];
+  if(valueList.length === 0){
+    valueList = [{}];
+  }
   
   const onChangeHandle = (value)=>{
     formData[showData.id] = value;
@@ -114,33 +118,44 @@ const WrapperAreaAdd = ({showData, parentItem, containStyle})=>{
   };
   
   return (
-    <div className='WrapperAreaAdd'>
-      {
-        valueList.map((item, index)=>{
-          return (
-            <div key={index} className='WrapperAreaAdd-item'>
-              <div className='WrapperAreaAdd-item-content'>
-                <WrapperArea
-                  {...{showData, parentItem, containStyle}}
-                  valueData={item}
-                  onChangeValue={(type, value)=>{
-                    changeItem(index, type, value)
-                  }}
-                />
+    <Wrapper
+      item={showData}
+      parentItem={parentItem}
+      containStyle={containStyle}
+      className={`${preview?'field-field-wrapper': 'field-wrapper'} add`}
+      inside={true}
+    >
+      <div className='wrapper-title'>{showData.labelText}</div>
+      <div className='field-wrapper-content'>
+        {
+          valueList.map((item, index)=>{
+            return (
+              <div key={index} className='WrapperAreaAdd-item'>
+                <div className='WrapperAreaAdd-item-content'>
+                  <WrapperArea
+                    {...{showData, parentItem, containStyle: {}}}
+                    valueData={item}
+                    hideTitle={true}
+                    isGroup={true}
+                    onChangeValue={(type, value)=>{
+                      changeItem(index, type, value)
+                    }}
+                  />
+                </div>
+                <div className='WrapperAreaAdd-item-options'>
+                  <Button text style={{marginRight: 6}} onClick={()=>{
+                    addItem(index)
+                  }}><IconFont type='add-circle' className='green'/></Button>
+                  <Button text onClick={()=>{
+                    deleteItem(index)
+                  }}><IconFont type='delete-circle' className='red'/></Button>
+                </div>
               </div>
-              <div className='WrapperAreaAdd-item-options'>
-                <Button text style={{marginRight: 6}} onClick={()=>{
-                  addItem(index)
-                }}><IconFont type='add-circle' className='green'/></Button>
-                <Button text onClick={()=>{
-                  deleteItem(index)
-                }}><IconFont type='delete-circle' className='red'/></Button>
-              </div>
-            </div>
-          )
-        })
-      }
-    </div>
+            )
+          })
+        }
+      </div>
+    </Wrapper>
   )
 };
 

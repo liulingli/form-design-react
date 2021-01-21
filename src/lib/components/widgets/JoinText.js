@@ -1,20 +1,21 @@
 /**
  * Date: 2019-06-07 23:49:16
  * Author: 刘伶俐
- * Desc: 表单设计器 -> 表单组件->输入框
+ * Desc: 表单设计器 -> 表单组件->拼接文本
  */
 import React from 'react';
 import {Input} from  '@alifd/next';
 
-export default class TextareaControl extends React.Component {
+export default class JoinText extends React.Component {
   constructor(props) {
     super(props)
   }
   
   render(){
-    const { value, onChange, ...other } = this.props;
+    const { value, onChange, isRows, ...other } = this.props;
+    const Component = isRows ? Input.TextArea: Input;
     return (
-      <Input.TextArea
+      <Component
         value={value}
         onChange={onChange}
         {...other}

@@ -3,17 +3,20 @@
  * Author: 刘伶俐
  * Desc: 表单设计器-通用组件-表单
  */
-import checkbox from './CheckboxControl';
+import checkboxGroup from './CheckboxGroupControl';
+import checkbox from './Checkbox';
 import datePicker from './DatePickerControl';
 import input from './InputControl';
-import radio from './RadioControl';
+import radioGroup from './RadioControl';
 import select from './SelectControl';
 import text from './TextControl';
-import textarea from './TextareaControl';
 import group from './GroupControl';
+import calculate from './Calculate';
+import joinText from './JoinText';
 
 const typeToWidget = {
-  checkbox, datePicker, input, radio, select, text, textarea, group
+  checkboxGroup, checkbox, datePicker, input, radioGroup, select, text, group,
+  calculate, joinText
 };
 
 export default typeToWidget
