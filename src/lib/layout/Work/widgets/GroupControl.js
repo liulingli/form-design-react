@@ -5,8 +5,8 @@
  */
 import React from 'react';
 import {Button} from '@alifd/next';
-import IconFont from '../../components/IconFont';
-import RenderField from '../../layout/Work/RenderField';
+import IconFont from '../../../components/IconFont/index';
+import RenderField from '../RenderField';
 
 export default class GroupControl extends React.Component {
   constructor(props) {

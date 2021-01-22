@@ -5,6 +5,7 @@
  */
 import './index.scss';
 import React, {forwardRef, useEffect} from 'react';
+import moment from 'moment';
 import FRWrapper from './FRWrapper';
 import {useSet} from './store/hooks';
 import {DEFAULT_SCHEMA} from './config';
@@ -90,7 +91,8 @@ const Main = ({defaultValue, isEdit: isEdit}, ref)=>{
   const onExportData = ()=>{
     let exportData = JSON.stringify(schema);
     let eleLink = document.createElement('a');
-    eleLink.download = `${new Date()}.txt`;
+    let name = moment(new Date()).format('YYYY-MM-DD');
+    eleLink.download = `${name}.txt`;
     eleLink.style.display = 'none';
     // 字符内容转变成blob地址
     let blob = new Blob([exportData]);

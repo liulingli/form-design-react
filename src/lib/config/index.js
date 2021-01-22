@@ -322,7 +322,7 @@ export const elements = [
     },
     setting: [
       ...commonSetting,
-      {label: '拼接规则', key: 'joinTextSetting', desc: ' ', type: 'joinTextSetting'},
+      {label: '拼接规则', key: 'joinTextSetting', desc: ' ', type: 'joinText'},
     ],
   },
   {
@@ -377,48 +377,12 @@ export const elements = [
   }
 ];
 
-export const DEFAULT_SCHEMA = {
+export const DEFAULT_SCHEMA_EMPTY = {
   schema: {
     '#': {
       id: '#',
       parent: null,
       type: 'area',
-    },
-    'input': {
-      id: 'input',
-      parent: '#',
-      type: 'input',
-      labelText: '文本框',
-    },
-    'textarea': {
-      id: 'textarea',
-      parent: '#',
-      type: 'input',
-      labelText: '大文本框',
-      isRows: true,
-      rows: 2,
-    },
-    'area': {
-      id: 'area',
-      parent: '#',
-      type: 'area',
-      labelText: '区域啊啊',
-    },
-    'checkbox': {
-      id: 'checkbox',
-      parent: 'area',
-      type: 'checkbox',
-      labelText: '复选框',
-      dataSource: [
-        {label: '选择1', value: '01'},
-        {label: '选择2', value: '02'}
-      ]
-    },
-    'group': {
-      id: 'group',
-      parent: '#',
-      type: 'group',
-      labelText: '成组',
     },
   },
   formData: {},
@@ -430,6 +394,7 @@ export const DEFAULT_SCHEMA = {
   }
 };
 
+export const DEFAULT_SCHEMA = {"schema":{"#":{"id":"#","parent":null,"type":"area"},"input":{"id":"input","parent":"#","type":"input","labelText":"文本框"},"textarea":{"id":"textarea","parent":"#","type":"input","labelText":"大文本框","isRows":true,"rows":2},"area":{"id":"area","parent":"#","type":"area","labelText":"区域啊啊"},"checkboxGroup":{"id":"checkboxGroup","parent":"area","type":"checkboxGroup","labelText":"复选框","dataSource":[{"label":"选择1","value":"01"},{"label":"选择2","value":"02"}]},"group":{"id":"group","parent":"#","type":"group","labelText":"成组"},"radioGroup_5f71161130867206175727":{"id":"radioGroup_5f71161130867206175727","labelText":"单选按钮组","type":"radioGroup","wrapStyle":{},"dataSource":[{"label":"值1","value":"01"},{"label":"值2","value":"02"}],"parent":"group"},"checkbox_6d49161130867253374200":{"id":"checkbox_6d49161130867253374200","labelText":"复选按钮","type":"checkbox","wrapStyle":{},"parent":"group"},"checkboxGroup_8e9e161130875345941024":{"id":"checkboxGroup_8e9e161130875345941024","labelText":"复选按钮组","type":"checkboxGroup","showType":"ver","wrapStyle":{},"dataSource":[{"label":"值1","value":"01"},{"label":"值2","value":"02"}],"parent":"group"},"select_2bab161130875503799715":{"id":"select_2bab161130875503799715","labelText":"下拉选择","type":"select","mode":"single","wrapStyle":{},"dataSource":[{"label":"值1","value":"01"},{"label":"值2","value":"02"}],"parent":"group"},"input_26b5161130876142195797":{"id":"input_26b5161130876142195797","labelText":"文本框","type":"input","wrapStyle":{},"parent":"group"},"joinText":{"id":"joinText","parent":"#","type":"joinText","labelText":"拼接文本","joinTextSetting":{"items":[{"wrap":"1","itemKey":"radioGroup_5f71161130867206175727","id":"radioGroup_5f71161130867206175727","labelText":"单选按钮组","type":"radioGroup","wrapStyle":{},"dataSource":[{"label":"值1","value":"01"},{"label":"值2","value":"02"}],"parent":"group","label":"单选按钮组","value":"radioGroup_5f71161130867206175727","parentType":"group","parentLabel":"成组","referencePoint":"radioGroup_5f71161130867206175727","isShow":true},{"wrap":"1","itemKey":"checkbox_6d49161130867253374200","id":"checkbox_6d49161130867253374200","labelText":"复选按钮","type":"checkbox","wrapStyle":{},"parent":"group","label":"复选按钮","value":"checkbox_6d49161130867253374200","parentType":"group","parentLabel":"成组","referencePoint":"checkbox_6d49161130867253374200","isShow":true},{"wrap":"1","itemKey":"checkboxGroup_8e9e161130875345941024","id":"checkboxGroup_8e9e161130875345941024","labelText":"复选按钮组","type":"checkboxGroup","showType":"ver","wrapStyle":{},"dataSource":[{"label":"值1","value":"01"},{"label":"值2","value":"02"}],"parent":"group","label":"复选按钮组","value":"checkboxGroup_8e9e161130875345941024","parentType":"group","parentLabel":"成组","referencePoint":"checkboxGroup_8e9e161130875345941024","isShow":true},{"wrap":"1","itemKey":"select_2bab161130875503799715","id":"select_2bab161130875503799715","labelText":"下拉选择","type":"select","mode":"single","wrapStyle":{},"dataSource":[{"label":"值1","value":"01"},{"label":"值2","value":"02"}],"parent":"group","label":"下拉选择","value":"select_2bab161130875503799715","parentType":"group","parentLabel":"成组","referencePoint":"select_2bab161130875503799715","isShow":true},{"wrap":"1","itemKey":"input_26b5161130876142195797","id":"input_26b5161130876142195797","labelText":"文本框","type":"input","wrapStyle":{},"parent":"group","label":"文本框","value":"input_26b5161130876142195797","parentType":"group","parentLabel":"成组","referencePoint":"input_26b5161130876142195797","isShow":true}],"showValue":"{「单选按钮组」「复选按钮」「复选按钮组」「下拉选择」「文本框」}"}}},"formData":{"group":[{"radioGroup_5f71161130867206175727":"02","checkbox_6d49161130867253374200":true}]},"frProps":{"column":2,"labelWidth":80,"textAlign":"right","displayType":"row"}}
 function getTypeToSetting(elements){
   const typeToSetting = {};
   elements.forEach(item=>{

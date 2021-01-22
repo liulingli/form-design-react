@@ -6,7 +6,7 @@
 import React from 'react';
 import {Balloon} from '@alifd/next';
 import IconFont from '../../components/IconFont';
-import typeToWidget from '../../components/widgets';
+import typeToWidget from './widgets';
 import {useStore} from '../../store/hooks';
 
 const RenderField = ({ data, labelStyle, fieldStyle, valueData, onChangeValue })=>{
@@ -42,6 +42,7 @@ const RenderField = ({ data, labelStyle, fieldStyle, valueData, onChangeValue })
           {...data}
           value={valueData?valueData[data.id]:formData[data.id]}
           onChange={onChangeHandle}
+          formData={formData}
         />
       </div>
     </div>

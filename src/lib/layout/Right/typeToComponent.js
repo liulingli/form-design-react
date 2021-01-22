@@ -7,6 +7,7 @@ import {Input, Radio, Select, Checkbox, Range} from '@alifd/next';
 import OptionList from './OptionList';
 import HideRule from './HideRule';
 import SketchPickerField from './SketchPickerField';
+import SplicingTextSetting from './SplicingTextSetting';
 
 const typeToComponent = {
   input: Input,
@@ -18,7 +19,8 @@ const typeToComponent = {
   optionList: OptionList,
   hideRule: HideRule,
   range: Range,
-  selectAuto: Select.AutoComplete
+  selectAuto: Select.AutoComplete,
+  joinText: SplicingTextSetting,
 };
 
 export default typeToComponent

@@ -11,7 +11,7 @@ function isCanInside(type){
 }
 
 // 新增表单项
-export const addItemFun = ({selected, item, data, schemaData})=>{
+export const addItemFun = ({selected, item, data})=>{
   // 新增至选中的里面，或上面
   let [dropItem, dropParent] = findItemByIdFromData(data, selected);
   
@@ -19,29 +19,30 @@ export const addItemFun = ({selected, item, data, schemaData})=>{
     dropParent = data[0];
   }
   
+  let addItem = null;
+  
   if(dropItem && isCanInside(dropItem.type)){
     dropItem.children = dropItem.children||[];
-    dropItem.children.push({
+    addItem = {
       ...item,
       parent: dropItem.id,
-    })
+    };
+    dropItem.children.push(addItem)
   }else{
     let dropIndex = dropItem? dropParent.children.findIndex(child=>child.id===dropItem.id): -1;
   
+    addItem = {
+      ...item,
+      parent: dropParent.id,
+    };
     if(dropIndex !==-1){
-      dropParent.children.splice(dropIndex+1, 0, {
-        ...item,
-        parent: dropParent.id,
-      })
+      dropParent.children.splice(dropIndex+1, 0, addItem)
     }else{
-      dropParent.children.push({
-        ...item,
-        parent: dropParent.id,
-      });
+      dropParent.children.push(addItem);
     }
   }
   
-  return [data, item.id]
+  return [data, item.id, addItem]
 };
 
 // 复制表单项, id要改变

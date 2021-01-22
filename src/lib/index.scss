@@ -95,9 +95,10 @@
   .react-form-design-drawer-left{
     width: 200px;
     background-color: #ffffff;
-    .next-tabs.next-medium .next-tabs-tab-inner{
-      font-size: 14px;
-      padding: 12px 29px;
+
+    .left-control-list{
+      width: 100%;
+      height: 100%;
     }
     .controls-form{
       .controls-form-item{
@@ -129,12 +130,39 @@
   .react-form-design-drawer-right{
     width: 350px;
     background-color: #ffffff;
+    .setting-config{
+      width: 100%;
+      height: 100%;
+    }
   }
   .react-grid-layout{
   }
   .react-grid-item{
     background-color: #FFFFFF;
     border: 1px solid #f3f3f3;
+  }
+
+  .next-tabs.next-medium .next-tabs-tab-inner{
+    font-size: 14px;
+    padding: 12px 29px;
+  }
+
+  .next-tabs{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .next-tabs-content{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .next-tabs-tabpane{
+    flex: 1;
+    overflow: auto;
+  }
+  .next-tabs-tabpane.hidden{
+    display: none;
   }
 }
 
@@ -360,15 +388,96 @@
 .WrapperAreaAdd-item{
   display: flex;
   align-items: center;
+
 }
 .WrapperAreaAdd-item-content{
   flex: 1;
   &>.field-wrapper{
     width: 100% !important;
     padding: 0;
+    &>.field-wrapper-group{
+      border: none;
+    }
   }
 }
 .WrapperAreaAdd-item-options{
   position: relative;
   z-index: 2;
+}
+
+// 简要病情拼接配置
+.SplicingTextModal{
+  .SplicingTextModal-title{
+    padding-bottom: 8px;
+  }
+  .single-item{
+    display: inline-block;
+    min-width: 60px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+    border-radius: 3px;
+    text-align: center;
+    padding: 0 8px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+    color: $color-brand1-6;
+    border: 1px solid #cccccc;
+    &.active{
+      background-color: $color-brand1-6;
+      color: #ffffff;
+    }
+  }
+  .SplicingTextModal-item-setting{
+    display: flex;
+  }
+  .setting-buttons{
+    width: 80px;
+    margin-top: 18px;
+    padding-left: 15px;
+    .next-btn.next-btn-primary{
+      margin-bottom: 6px;
+    }
+  }
+  .setting-form{
+    flex: 1;
+    padding: 0;
+    padding-top: 6px;
+    border-top: 1px solid #cccccc;
+    margin-top: 6px;
+    overflow: hidden;
+    .next-form{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .next-form-item{
+      width: 33%;
+    }
+  }
+  .next-select{
+    width: 100%;
+  }
+  .next-select-multiple.next-medium .next-select-values,
+  .next-select-tag.next-medium .next-select-values{
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .next-table{
+    width: 100%;
+  }
+  .next-table th{
+    background-color: #eaeaea;
+    color: #3c3c3c;
+  }
+  .next-table.next-table-small td .next-table-cell-wrapper{
+    padding: 0;
+  }
+  .next-table-cell-edit.next-input{
+    width: 100%;
+  }
+  .next-span-text{
+    padding: 0 8px;
+  }
 }
