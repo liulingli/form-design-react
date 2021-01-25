@@ -4,7 +4,7 @@
  * Desc: 表单设计器-属性配置区-组件配置-选项配置
  */
 import React from 'react';
-import {Input, Button} from '@alifd/next';
+import {Input, Button, Dialog} from '@alifd/next';
 import IconFont from '../../components/IconFont';
 
 export default class OptionList extends React.Component{
@@ -41,6 +41,21 @@ export default class OptionList extends React.Component{
     this.props.onChange && this.props.onChange(value)
   }
   
+  parseItemsToString(){
+    let {value = [{value: '', label: '', calcValue: ''}]} = this.props;
+    return value.map((item=>{
+      return `${item.value||''} ${item.label||''} ${item.calcValue||''}`
+    })).join('\n');
+  }
+  
+  parseStringToItems(){
+    let itemsString = this.state.itemsString||'';
+    return itemsString.split('\n').map(str=>{
+      let [value='', label='', calcValue=''] = (str||'').split(' ');
+      return {value, label, calcValue}
+    })
+  }
+  
   render(){
     let {value = [{value: '', label: '', calcValue: ''}]} = this.props;
     if(!value || value.length === 0){
@@ -48,6 +63,12 @@ export default class OptionList extends React.Component{
     }
     return(
       <div className='option-list-setting'>
+        <div><Button type='primary' onClick={()=>{
+          this.setState({
+            visible: true,
+            itemsString: this.parseItemsToString()
+          })
+        }}>批量录入</Button></div>
         <div className='option-list-title'>
           <div className='option-list-item title'>值</div>
           <div className='option-list-item title'>名称</div>
@@ -77,6 +98,30 @@ export default class OptionList extends React.Component{
             })
           }
         </div>
+        
+        <Dialog
+          title='批量录入选项'
+          visible={this.state.visible}
+          onOk={()=>{
+            this.setState({
+              visible: false,
+            });
+            this.props.onChange && this.props.onChange(this.parseStringToItems(this.state.itemsString))
+          }}
+          onClose={()=>this.setState({visible: false})}
+          onCancel={()=>this.setState({visible: false})}
+        >
+          <Input.TextArea
+            rows={8}
+            style={{width: 400}}
+            value={this.state.itemsString}
+            onChange={(value)=>{
+              this.setState({
+                itemsString: value
+              })
+            }}
+          />
+        </Dialog>
       </div>
     )
   }

@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import ReactFormDesign from './lib';
 
 ReactDOM.render(
-  <ReactFormDesign/>,
+  <ReactFormDesign isEdit={true} autoWidth/>,
   document.getElementById('root')
 );
 

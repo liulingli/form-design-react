@@ -8,25 +8,37 @@ import React, {forwardRef, useEffect} from 'react';
 import moment from 'moment';
 import FRWrapper from './FRWrapper';
 import {useSet} from './store/hooks';
+import getJoinSpecialSituationText from './store/getJoinSpecialSituationText';
 import {DEFAULT_SCHEMA} from './config';
 
-const Main = ({defaultValue, isEdit: isEdit}, ref)=>{
+const Main = ({defaultValue, isEdit: isEdit, isPhone}, ref)=>{
   const [state, setState] = useSet({
     schema: defaultValue ? defaultValue : DEFAULT_SCHEMA,
-    preview: false, // preview = false 是编辑模式
+    preview: isEdit?false:true, // preview = false 是编辑模式
     selected: undefined, // 被选中的$id,
     selectedItem: undefined,
     undoItems: [],
     redoItems: [],
     isEdit: isEdit,
+    isPhone: isPhone,
   });
   
   useEffect(() => {
   });
   
+  const getJointValue = (schema, formData)=>{
+    for(let key in schema){
+      if(schema[key].type === 'joinText'){
+        const {joinTextSetting} = schema[key];
+        formData[key] = getJoinSpecialSituationText(formData, joinTextSetting||{})
+      }
+    }
+  };
+  
   const onChange = data => {
     addUndoItems(schema);
     const result = { ...schema};
+    getJointValue(schema.schema, data);
     result.formData = data;
     setState({ schema: result });
   };
@@ -170,6 +182,7 @@ const Main = ({defaultValue, isEdit: isEdit}, ref)=>{
     undoItems, redoItems,
   
     isEdit,
+    isPhone,
     ...rootState,
     
     onChange,

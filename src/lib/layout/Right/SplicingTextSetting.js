@@ -27,14 +27,14 @@ export default class SplicingTextSetting extends React.Component{
   }
   
   render(){
-    const {schema, value, selectedItem} = this.props;
+    const {schema, value, selectedItem, disabled} = this.props;
     const referencePoint = Object.keys(schema).map(key=>{
       const parentType = schema[key].parent?schema[schema[key].parent].type: null;
       const parentLabel = schema[key].parent?schema[schema[key].parent].labelText: null;
       
       return {
         ...schema[key],
-        label: schema[key].labelText,
+        label: schema[key].formName,
         value: key,
         itemKey: key,
         parentType: parentType,
@@ -44,7 +44,7 @@ export default class SplicingTextSetting extends React.Component{
     
     return (
       <div className='splicing-text-setting'>
-        <Button text type='primary' onClick={()=>{
+        <Button text type='primary' disabled={disabled} onClick={()=>{
           this.setState({
             visible: true
           })

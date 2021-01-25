@@ -28,7 +28,7 @@ const RenderField = ({ data, labelStyle, fieldStyle, valueData, onChangeValue })
   return (
     <div className='render-field' style={fieldStyle}>
       {
-        data.type!=='text' &&
+        data.type!=='text' && !(data.isLabelNullWidth && [null, '', undefined].includes(data.labelText)) &&
         <div
           className='render-field-label'
           style={labelStyle}

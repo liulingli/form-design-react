@@ -3,6 +3,7 @@
  * Author: 刘伶俐
  * Desc: 表单设计器-属性配置区
  */
+import './index.scss';
 import React from 'react';
 import {Tab} from '@alifd/next';
 import FormSetting from './FormSetting';

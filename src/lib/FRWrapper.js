@@ -12,7 +12,8 @@ import Setting from './layout/Right';
 import config from './config/index';
 import {parseFlattenToData, parseDataToFlatten} from './store/utils';
 
-const Wrapper = ({schema, formData, onChange, onSchemaChange, setGlobal, frProps, onFrPropsChange, ...rootState}) => {
+const Wrapper = ({schema, formData, onChange, onSchemaChange, setGlobal, frProps,
+                   onFrPropsChange, isEdit, isPhone, ...rootState}) => {
   const {simple = true, preview} = rootState;
   
   const data = parseFlattenToData(schema.schema);
@@ -40,22 +41,31 @@ const Wrapper = ({schema, formData, onChange, onSchemaChange, setGlobal, frProps
   return (
     <Ctx.Provider value={setGlobal}>
       <StoreCtx.Provider value={store}>
-        <div className='react-form-design'>
-          <div className='react-form-design-toolbar'>
-            <Toolbar/>
-          </div>
-          <div className='react-form-design-drawer'>
-            <div className='react-form-design-drawer-left'>
-              <ControlList />
+        {
+          isEdit?
+            <div className='react-form-design'>
+              <div className='react-form-design-toolbar'>
+                <Toolbar/>
+              </div>
+              <div className='react-form-design-drawer'>
+                <div className='react-form-design-drawer-left'>
+                  <ControlList />
+                </div>
+                <div className={`react-form-design-drawer-center ${preview?'preview':''}`}>
+                  <WorkAreaGrid />
+                </div>
+                <div className='react-form-design-drawer-right'>
+                  <Setting />
+                </div>
+              </div>
+            </div>:
+            <div className='react-form-design'>
+              <div className='react-form-design-drawer-center'>
+                <WorkAreaGrid />
+              </div>
             </div>
-            <div className='react-form-design-drawer-center'>
-              <WorkAreaGrid />
-            </div>
-            <div className='react-form-design-drawer-right'>
-              <Setting />
-            </div>
-          </div>
-        </div>
+        }
+       
       </StoreCtx.Provider>
     </Ctx.Provider>
   )

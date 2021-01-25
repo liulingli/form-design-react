@@ -15,13 +15,14 @@ export default ()=>{
   const onChange = (type, value)=>{
     onItemSettingChange(selected, type, value);
   };
+  const disabled = selected === '#';
   
   return (
     <div className='setting-main'>
       {
         settings.map((item, index)=>{
           const Component = typeToComponent[item.type];
-          const {label, ...other} = item;
+          const {label, text, ...other} = item;
           let showValue = null;
           if(item.key === 'value'){
             showValue = formData[selected]
@@ -34,12 +35,15 @@ export default ()=>{
                 {Component &&
                 <Component
                   {...other}
+                  label={text}
                   schema={schema.schema}
                   selectedItem={selectedItem}
+                  checked={selectedItem[item.key]}
                   value={selectedItem[item.key]||showValue}
                   onChange={(value)=>{
                     onChange(item.key, value)
                   }}
+                  disabled={disabled}
                 />}
               </div>
             </div>

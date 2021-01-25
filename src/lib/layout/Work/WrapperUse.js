@@ -24,9 +24,11 @@ export default ({item={type: 'area', id: '#'}, children, containStyle, className
     borderBottomWidth: border.includes('bottom')?borderWidth:0,
   };
   
+  const oneSelfClassName = item.oneSelf? 'one-self': '';
+  
   return(
     <div
-      className={`field-field-wrapper  ${className||''} ${isHide?'hide': ''}`}
+      className={`field-field-wrapper ${['area', 'group'].includes(item.type)?'padding-none': ''} ${className||''} ${oneSelfClassName} ${isHide?'hide': ''}`}
       style={{
         ...containStyle,
         ...item.wrapStyle,

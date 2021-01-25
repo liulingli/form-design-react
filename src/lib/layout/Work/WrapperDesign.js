@@ -154,31 +154,33 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
     borderBottomWidth: border.includes('bottom')?borderWidth:0,
   };
   
-  return (
-    <div
-      className={`field-wrapper ${isSelect?'select': ''} ${className||''} ${isHide?'hide': ''}`}
-      ref={boxRef}
-      style={{
-        backgroundColor: item.type==='area'?'#f1f1f1': '',
-        ...overwriteStyle,
-        ...containStyle,
-        ...item.wrapStyle,
-        ...borderStyleMain
-      }}
-      onClick={handleClick}
-    >
-      {isSelect && !isGroup &&
-      <div>
-        <div className='drag-icon-wrapper' ref={dragRef}>
-          <IconFont type='move'/>
-        </div>
-        <div className='buttons-wrapper'>
-          <Button text onClick={deleteItem}><IconFont type='delete' title='删除'/></Button>
-          <Button text onClick={handleItemCopy}><IconFont type='copy' title='复制'/></Button>
-        </div>
+  const fieldWrapper = <div
+    className={`field-wrapper ${isSelect?'select': ''} ${className||''} ${isHide?'hide': ''}`}
+    ref={boxRef}
+    style={{
+      backgroundColor: item.type==='area'?'#f1f1f1': '',
+      ...overwriteStyle,
+      ...containStyle,
+      ...item.wrapStyle,
+      ...borderStyleMain
+    }}
+    onClick={handleClick}
+  >
+    {isSelect && !isGroup &&
+    <div>
+      <div className='drag-icon-wrapper' ref={dragRef}>
+        <IconFont type='move'/>
       </div>
-      }
-      {children}
+      <div className='buttons-wrapper'>
+        <Button text onClick={deleteItem}><IconFont type='delete' title='删除'/></Button>
+        <Button text onClick={handleItemCopy}><IconFont type='copy' title='复制'/></Button>
+      </div>
     </div>
-  )
+    }
+    {children}
+  </div>;
+  
+  
+  return item.oneSelf?
+    <div className='one-self'>{fieldWrapper}</div> : fieldWrapper
 }

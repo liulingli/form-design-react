@@ -232,7 +232,7 @@ export function getIsHide(hideRule, formData){
     // 选中的显示
     let hide2 = getHideBySet(value, useShowType, showType, showValue, type);
     // 选中的隐藏
-    let hide3 = !getHideBySet(value, useHideType, hideType, hideValue, type);
+    let hide3 = useHideType && !getHideBySet(value, useHideType, hideType, hideValue, type);
     
     isHide = hide1 || hide2 || hide3;
     

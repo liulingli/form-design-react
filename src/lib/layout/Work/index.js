@@ -3,6 +3,7 @@
  * Author: 刘伶俐
  * Desc: 表单设计器-工作区域
  */
+import './index.scss';
 import React from 'react';
 import {Button} from '@alifd/next';
 import IconFont from '../../components/IconFont';
@@ -23,7 +24,7 @@ const FR = ({data: frData, parentItem={}, valueData, onChangeValue})=>{
   }
   
   const containStyle = {
-    width: `${100/(showData.wrapWidth|| parentItem.column||frProps.column||1)}%`,
+    width: showData.wrapWidth? showData.wrapWidth: `${100/(parentItem.column||frProps.column||1)}%`,
   };
   
   const labelStyle = {
