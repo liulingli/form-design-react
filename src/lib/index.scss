@@ -1,6 +1,13 @@
 @import './config';
-.next-dialog-body{
-  color: #3c3c3c;
+
+body{
+  .next-dialog-body{
+    color: #3c3c3c;
+  }
+  .next-input.next-disabled input,
+  .next-input.next-disabled textarea{
+    color: #3c3c3c;
+  }
 }
 
 .react-form-design{

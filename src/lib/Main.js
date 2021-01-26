@@ -9,6 +9,7 @@ import moment from 'moment';
 import FRWrapper from './FRWrapper';
 import {useSet} from './store/hooks';
 import getJoinSpecialSituationText from './store/getJoinSpecialSituationText';
+import getCalculateValueText from './store/getCalculateValue';
 import {DEFAULT_SCHEMA} from './config';
 
 const Main = ({defaultValue, isEdit: isEdit, isPhone}, ref)=>{
@@ -35,9 +36,19 @@ const Main = ({defaultValue, isEdit: isEdit, isPhone}, ref)=>{
     }
   };
   
+  const getCalculateValue = (schema, formData)=>{
+    for(let key in schema){
+      if(schema[key].type === 'calculate'){
+        const {calculateSetting} = schema[key];
+        formData[key] = getCalculateValueText(formData, calculateSetting||{}, schema)
+      }
+    }
+  };
+  
   const onChange = data => {
     addUndoItems(schema);
     const result = { ...schema};
+    getCalculateValue(schema.schema, data);
     getJointValue(schema.schema, data);
     result.formData = data;
     setState({ schema: result });

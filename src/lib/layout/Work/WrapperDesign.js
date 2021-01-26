@@ -142,7 +142,7 @@ export default ({inside, item={type: 'area', id: '#'}, children, parentItem, con
     }
   }
   
-  let isHide = getIsHide(item.hideRule, formData);
+  let isHide = item.isHide||getIsHide(item.hideRule, formData);
   let {border = [], borderStyle='solid', borderWidth=1, borderColor} = item;
   borderWidth = borderWidth - 0;
   let borderStyleMain = {

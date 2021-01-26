@@ -12,12 +12,18 @@ export default class InputControl extends React.Component {
   }
 
   render(){
-    const { value, onChange, isRows, ...other } = this.props;
+    const { value, onChange, isRows, reg, ...other } = this.props;
     const Component = isRows ? Input.TextArea: Input;
+    
     return (
       <Component
         value={value}
-        onChange={onChange}
+        onChange={(value)=>{
+          if (!new RegExp(reg).test(value) && value !== '') {
+            return
+          }
+          onChange && onChange(value)
+        }}
         {...other}
       />
     )

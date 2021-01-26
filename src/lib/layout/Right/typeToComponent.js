@@ -5,9 +5,10 @@
  */
 import {Input, Radio, Select, Checkbox, Range} from '@alifd/next';
 import OptionList from './OptionList';
-import HideRule from './HideRule';
+import HideRuleSetting from './HideRuleSetting';
 import SketchPickerField from './SketchPickerField';
 import SplicingTextSetting from './SplicingTextSetting';
+import CalculateSetting from './CalculateSetting';
 
 const typeToComponent = {
   input: Input,
@@ -17,10 +18,11 @@ const typeToComponent = {
   checkboxGroup: Checkbox.Group,
   sketchPicker: SketchPickerField,
   optionList: OptionList,
-  hideRule: HideRule,
+  hideRule: HideRuleSetting,
   range: Range,
   selectAuto: Select.AutoComplete,
   joinText: SplicingTextSetting,
+  calculate: CalculateSetting,
 };
 
 export default typeToComponent

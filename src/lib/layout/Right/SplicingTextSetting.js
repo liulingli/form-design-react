@@ -56,7 +56,6 @@ export default class SplicingTextSetting extends React.Component{
           this.state.visible &&
           <SplicingTextModal
             title='拼接规则配置'
-            visible={true}
             onOk={this.onOk.bind(this)}
             onClose={this.onClose.bind(this)}
             onCancel={this.onClose.bind(this)}
@@ -77,7 +76,6 @@ class SplicingTextModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: props.visible,  // 是否显示
       dataSourceKey: {
         referencePoint: props.referencePoint||[],
         relationPoint: props.referencePoint||[],
@@ -236,7 +234,6 @@ class SplicingTextModal extends React.Component {
     const config = this.state.config||{};
     const {items=[]} = config;
     
-    console.log({ items });
     if(items.filter(item=>item.itemKey === 'null').length > 0){
       return;
     }
@@ -255,8 +252,6 @@ class SplicingTextModal extends React.Component {
     });
     this.field.reset();
     this.field.setValues(record);
-    
-    console.log({field: this.field, record})
   }
   
   /**
@@ -293,17 +288,11 @@ class SplicingTextModal extends React.Component {
   
   onClose() {
     const {onClose} = this.props;
-    this.setState({
-      visible: false,
-    });
     onClose && onClose();
   }
   
   onCancel() {
     const {onCancel} = this.props;
-    this.setState({
-      visible: false
-    });
     onCancel && onCancel();
   }
   
@@ -311,9 +300,6 @@ class SplicingTextModal extends React.Component {
    * 保存显示格式配置
    */
   onOk() {
-    this.setState({
-      visible: false
-    });
     this.props.onOk && this.props.onOk(this.state.config)
   }
   
@@ -347,7 +333,7 @@ class SplicingTextModal extends React.Component {
           onSave: '确定',
           onCancel: '取消'
         }}
-        visible={this.state.visible}
+        visible={true}
         onOk={this.onOk.bind(this)}
         onCancel={this.onCancel.bind(this)}
         onClose={this.onClose.bind(this)}
