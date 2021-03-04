@@ -8,6 +8,12 @@ body{
   .next-input.next-disabled textarea{
     color: #3c3c3c;
   }
+
+  .next-radio-label,
+  .next-checkbox-label,
+  .next-input.next-input-textarea textarea{
+    font-size: 14px;
+  }
 }
 
 .react-form-design{
