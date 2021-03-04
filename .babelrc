@@ -1,6 +1,24 @@
 {
   "presets": [
-    "flow",
-    "react"
+    [
+      "@babel/env", {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "not IE <= 10"
+          ]
+        },
+        "modules": false
+      }
+    ],
+    "@babel/react"
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties", // 编译class类
+    "@babel/transform-runtime",
+    ["babel-plugin-import", {
+      "libraryName": "@alifd/next",
+      "style": true
+    }, "@alifd/next"]
   ]
 }
