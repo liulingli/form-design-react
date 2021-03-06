@@ -11,7 +11,9 @@ body{
 
   .next-radio-label,
   .next-checkbox-label,
-  .next-input.next-input-textarea textarea{
+  .next-input.next-input-textarea textarea,
+  .next-menu-item-inner,
+  .next-btn.next-medium{
     font-size: 14px;
   }
 }
