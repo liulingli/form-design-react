@@ -11,7 +11,7 @@
     "@alifd/next": "^1.21.8",
     "@icedesign/theme": "^0.1.0",
     "immutable": "^4.0.0-rc.12",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-color": "^2.19.3",
